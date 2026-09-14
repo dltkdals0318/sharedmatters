@@ -8,10 +8,42 @@ const caption = document.getElementById("caption");
 const selectedDetail = document.getElementById("selectedDetail");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
+const lightboxVideo = document.getElementById("lightboxVideo");
 const detailColumns = [...document.querySelectorAll(".detail-column")];
 const workIndexByColumn = [0, 0, 0];
 const promptKeys = ["promptA", "promptB", "promptC"];
 const promptLabels = ["Prompt A", "Prompt B", "Prompt C"];
+const URL_PATTERN = /https?:\/\/[^\s]+/g;
+
+function appendTextWithLinks(parent, text) {
+  const paragraphs = text.split("\n\n");
+  paragraphs.forEach((paragraph, i) => {
+    if (i > 0) {
+      parent.appendChild(document.createElement("br"));
+      parent.appendChild(document.createElement("br"));
+    }
+
+    let lastIndex = 0;
+    for (const match of paragraph.matchAll(URL_PATTERN)) {
+      const trimmed = match[0].replace(/[),.]+$/, "");
+      const start = match.index;
+      if (start > lastIndex) {
+        parent.appendChild(document.createTextNode(paragraph.slice(lastIndex, start)));
+      }
+      const a = document.createElement("a");
+      a.href = trimmed;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "detail-link";
+      a.textContent = trimmed;
+      parent.appendChild(a);
+      lastIndex = start + trimmed.length;
+    }
+    if (lastIndex < paragraph.length) {
+      parent.appendChild(document.createTextNode(paragraph.slice(lastIndex)));
+    }
+  });
+}
 
 function setPageColor(color, textColor = "#111111") {
   document.documentElement.style.setProperty("--page-color", color);
@@ -50,7 +82,20 @@ function renderColumn(colIndex) {
       if (block.type === "text") {
         const p = document.createElement("p");
         p.className = "detail-text";
-        p.textContent = block.text;
+        appendTextWithLinks(p, block.text);
+        return p;
+      }
+
+      if (block.type === "link") {
+        const p = document.createElement("p");
+        p.className = "detail-text";
+        const a = document.createElement("a");
+        a.href = block.href;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.className = "detail-link";
+        a.textContent = block.text ?? block.href;
+        p.appendChild(a);
         return p;
       }
 
@@ -58,8 +103,11 @@ function renderColumn(colIndex) {
         const video = document.createElement("video");
         video.className = "detail-video";
         video.src = block.src;
-        video.controls = true;
-        video.preload = "metadata";
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.preload = "auto";
         return video;
       }
 
@@ -129,22 +177,48 @@ detailColumns.forEach((column) => {
 });
 
 function openLightbox(src, alt) {
+  lightboxVideo.pause();
+  lightboxVideo.removeAttribute("src");
+  lightboxVideo.classList.remove("is-visible");
+
   lightboxImage.src = src;
   lightboxImage.alt = alt;
+  lightboxImage.classList.add("is-visible");
   lightbox.classList.add("is-visible");
+}
+
+function openLightboxVideo(src) {
+  lightboxImage.removeAttribute("src");
+  lightboxImage.classList.remove("is-visible");
+
+  lightboxVideo.src = src;
+  lightboxVideo.classList.add("is-visible");
+  lightbox.classList.add("is-visible");
+  lightboxVideo.play();
 }
 
 function closeLightbox() {
   lightbox.classList.remove("is-visible");
   lightboxImage.removeAttribute("src");
+  lightboxImage.classList.remove("is-visible");
+  lightboxVideo.pause();
+  lightboxVideo.removeAttribute("src");
+  lightboxVideo.classList.remove("is-visible");
 }
 
 selectedDetail.addEventListener("click", (event) => {
   const image = event.target.closest(".detail-image");
-  if (image) openLightbox(image.src, image.alt);
+  if (image) {
+    openLightbox(image.src, image.alt);
+    return;
+  }
+
+  const video = event.target.closest(".detail-video");
+  if (video) openLightboxVideo(video.src);
 });
 
 lightbox.addEventListener("click", closeLightbox);
+lightboxVideo.addEventListener("click", (event) => event.stopPropagation());
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && lightbox.classList.contains("is-visible")) {
