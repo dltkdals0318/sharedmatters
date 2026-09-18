@@ -1,5 +1,21 @@
 const HOME_INDEX = 0;
 
+const deviceBlockBadge = document.getElementById("deviceBlockBadge");
+if (deviceBlockBadge) {
+  const badgePalette = works.filter((_, index) => index !== HOME_INDEX);
+  let badgePaletteIndex = 0;
+
+  const cycleBadgeColor = () => {
+    const work = badgePalette[badgePaletteIndex % badgePalette.length];
+    deviceBlockBadge.style.backgroundColor = work.bg;
+    deviceBlockBadge.style.color = work.ink;
+    badgePaletteIndex += 1;
+  };
+
+  cycleBadgeColor();
+  setInterval(cycleBadgeColor, 1000);
+}
+
 const page = document.getElementById("page");
 const leftPanel = document.getElementById("leftPanel");
 const toc = document.getElementById("toc");
@@ -240,7 +256,6 @@ selectedDetail.addEventListener("click", (event) => {
 });
 
 lightbox.addEventListener("click", closeLightbox);
-lightboxVideo.addEventListener("click", (event) => event.stopPropagation());
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && lightbox.classList.contains("is-visible")) {

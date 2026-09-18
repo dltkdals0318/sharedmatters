@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="device-block" role="alert">
+      <p class="device-block-badge" id="deviceBlockBadge">
+        이 웹사이트는 노트북 환경에 최적화되어 있습니다.
+      </p>
+    </div>
+
     <main class="page" id="page">
       <section class="left" id="leftPanel" aria-live="polite">
         <div class="left-top">
@@ -94,12 +100,7 @@
 
         <div class="lightbox" id="lightbox">
           <img class="lightbox-image" id="lightboxImage" alt="" />
-          <video
-            class="lightbox-video"
-            id="lightboxVideo"
-            controls
-            playsinline
-          ></video>
+          <video class="lightbox-video" id="lightboxVideo" playsinline></video>
         </div>
       </section>
 

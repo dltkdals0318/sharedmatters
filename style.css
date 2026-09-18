@@ -18,11 +18,22 @@
   --page-color: #ffffff;
   --ink: #111;
   --split: 72.973%;
-  --row-height: 38px;
+  --row-height: 2.375rem;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.device-block {
+  display: none;
+}
+
+.device-block-badge {
+  display: inline-block;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
 }
 
 html,
@@ -33,6 +44,13 @@ body,
 .detail-column {
   overscroll-behavior: none;
   word-break: keep-all;
+}
+
+html {
+  /* 16px at a 1440px-wide MacBook viewport; scales up proportionally
+     on wider screens so the whole rem-based layout keeps the same
+     visual ratio instead of looking smaller on big monitors. */
+  font-size: clamp(16px, 1.1111vw, 999px);
 }
 
 html,
@@ -72,26 +90,26 @@ body {
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  padding: 30px 52px;
+  padding: 1.875rem 3.25rem;
   background: var(--page-color);
   contain: layout paint;
 }
 
 .page.is-selected .left {
-  padding: 20px 22px;
+  padding: 1.25rem 1.375rem;
 }
 
 .left-top {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
-  max-width: 800px;
+  max-width: 50rem;
 }
 
 .home-title {
   margin: 0;
   font-family: "ABC Camera Trial", sans-serif;
   font-weight: 500;
-  font-size: 47pt;
+  font-size: 3.9167rem;
 }
 
 .default-menu.is-hidden {
@@ -100,17 +118,17 @@ body {
 
 .caption {
   position: absolute;
-  left: 56px;
-  top: 130px;
-  font-size: 16px;
+  left: 3.5rem;
+  top: 8.125rem;
+  font-size: 1rem;
   line-height: 1.45;
-  max-width: 508px;
+  max-width: 31.75rem;
 }
 
 .credits {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 4px 16px;
+  gap: 0.25rem 1rem;
   margin: 0;
 }
 
@@ -164,7 +182,7 @@ body {
   z-index: 5;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 2.5rem;
   background: rgba(0, 0, 0, 0.5);
   cursor: zoom-out;
 }
@@ -193,7 +211,7 @@ body {
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 18px 18px 48px;
+  padding: 1.125rem 1.125rem 3rem;
   background: var(--column-color, var(--page-color));
   contain: layout paint;
   scrollbar-width: none;
@@ -206,14 +224,14 @@ body {
 
 .column-header {
   flex-shrink: 0;
-  margin: 0 0 20px;
+  margin: 0 0 1.25rem;
 }
 
 .column-title {
-  margin: 0 0 10px;
+  margin: 0 0 0.625rem;
   font-family:
     "Pretendard Variable", Helvetica, "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(16px, 1.6vw, 22px);
+  font-size: clamp(1rem, 1.6vw, 1.375rem);
   line-height: 1.08;
   letter-spacing: 0.01em;
   font-weight: 600;
@@ -222,7 +240,7 @@ body {
 
 .column-author {
   margin: 0;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.3;
   font-weight: 400;
 }
@@ -230,7 +248,7 @@ body {
 .scroll-next {
   display: block;
   flex-shrink: 0;
-  margin: 20px auto 0;
+  margin: 1.25rem auto 0;
   padding: 0;
   border: 0;
   appearance: none;
@@ -238,7 +256,7 @@ body {
   background: none;
   color: inherit;
   font: inherit;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   text-transform: lowercase;
   letter-spacing: 0.02em;
@@ -254,8 +272,8 @@ body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 20px;
-  margin: 0 0 20px;
+  gap: 1.25rem;
+  margin: 0 0 1.25rem;
 }
 
 .detail-blocks:empty {
@@ -280,7 +298,7 @@ body {
 
 .detail-text {
   margin: 0;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.55;
   letter-spacing: -0.01em;
   font-weight: 500;
@@ -295,7 +313,7 @@ body {
 
 .detail-spacer {
   flex: 1 0 auto;
-  min-height: 220px;
+  min-height: 13.75rem;
 }
 
 .right {
@@ -336,13 +354,13 @@ body {
   flex: 1 0 auto;
   min-height: var(--row-height);
   border: 0;
-  padding: 0 18px;
+  padding: 0 1.125rem;
   display: flex;
   align-items: center;
   cursor: pointer;
   text-align: left;
   font: inherit;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1;
   letter-spacing: -0.025em;
 }
@@ -370,32 +388,32 @@ body {
 
 @media (max-width: 760px) {
   :root {
-    --row-height: 44px;
+    --row-height: 2.75rem;
   }
 
   .left,
   .page.is-selected .left {
-    padding: 16px 14px;
+    padding: 1rem 0.875rem;
   }
 
   .caption {
-    left: 14px;
-    top: 132px;
-    max-width: calc(100% - 28px);
+    left: 0.875rem;
+    top: 8.25rem;
+    max-width: calc(100% - 1.75rem);
   }
 
   .detail-column {
-    padding: 14px 12px 40px;
+    padding: 0.875rem 0.75rem 2.5rem;
   }
 
   .detail-text {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .toc-item {
-    padding: 0 12px;
-    font-size: 17px;
-    min-height: 52px;
+    padding: 0 0.75rem;
+    font-size: 1.0625rem;
+    min-height: 3.25rem;
   }
 }
 
@@ -422,7 +440,7 @@ body {
 
   .left {
     height: 34vh;
-    min-height: 250px;
+    min-height: 15.625rem;
   }
 
   .page.is-selected .left {
@@ -461,6 +479,27 @@ body {
 
   .caption {
     top: auto;
-    bottom: 18px;
+    bottom: 1.125rem;
+  }
+}
+
+@media (max-width: 839px) {
+  .device-block {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--page-color);
+    color: var(--ink);
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .page {
+    display: none;
   }
 }
