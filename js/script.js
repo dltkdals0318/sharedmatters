@@ -15,6 +15,23 @@ const promptKeys = ["promptA", "promptB", "promptC"];
 const promptLabels = ["Prompt A", "Prompt B", "Prompt C"];
 const URL_PATTERN = /https?:\/\/[^\s]+/g;
 
+const videoObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        if (!video.src && video.dataset.src) {
+          video.src = video.dataset.src;
+        }
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  },
+  { threshold: 0.25 },
+);
+
 function appendTextWithLinks(parent, text) {
   const paragraphs = text.split("\n\n");
   paragraphs.forEach((paragraph, i) => {
@@ -102,12 +119,12 @@ function renderColumn(colIndex) {
       if (block.type === "video") {
         const video = document.createElement("video");
         video.className = "detail-video";
-        video.src = block.src;
+        video.dataset.src = block.src;
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
-        video.autoplay = true;
-        video.preload = "auto";
+        video.preload = "none";
+        videoObserver.observe(video);
         return video;
       }
 
@@ -214,7 +231,7 @@ selectedDetail.addEventListener("click", (event) => {
   }
 
   const video = event.target.closest(".detail-video");
-  if (video) openLightboxVideo(video.src);
+  if (video) openLightboxVideo(video.src || video.dataset.src);
 });
 
 lightbox.addEventListener("click", closeLightbox);
