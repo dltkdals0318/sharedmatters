@@ -94,6 +94,9 @@ function renderColumn(colIndex) {
   column.querySelector(".column-author").textContent = work.author ?? "";
 
   const blocksContainer = column.querySelector(".detail-blocks");
+  blocksContainer.querySelectorAll(".detail-video").forEach((video) => {
+    videoObserver.unobserve(video);
+  });
   blocksContainer.replaceChildren(
     ...blocks.map((block) => {
       if (block.type === "text") {
@@ -196,6 +199,7 @@ detailColumns.forEach((column) => {
 function openLightbox(src, alt) {
   lightboxVideo.pause();
   lightboxVideo.removeAttribute("src");
+  lightboxVideo.load();
   lightboxVideo.classList.remove("is-visible");
 
   lightboxImage.src = src;
@@ -211,7 +215,7 @@ function openLightboxVideo(src) {
   lightboxVideo.src = src;
   lightboxVideo.classList.add("is-visible");
   lightbox.classList.add("is-visible");
-  lightboxVideo.play();
+  lightboxVideo.play().catch(() => {});
 }
 
 function closeLightbox() {
@@ -220,6 +224,7 @@ function closeLightbox() {
   lightboxImage.classList.remove("is-visible");
   lightboxVideo.pause();
   lightboxVideo.removeAttribute("src");
+  lightboxVideo.load();
   lightboxVideo.classList.remove("is-visible");
 }
 

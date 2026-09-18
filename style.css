@@ -176,8 +176,8 @@ body {
 .lightbox-image,
 .lightbox-video {
   display: none;
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 75%;
+  max-height: 75%;
   object-fit: contain;
 }
 
@@ -370,7 +370,6 @@ body {
 
 @media (max-width: 760px) {
   :root {
-    --split: 72.973%;
     --row-height: 44px;
   }
 
