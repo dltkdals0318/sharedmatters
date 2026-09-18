@@ -15,7 +15,7 @@ const works = [
   },
   {
     title: "오픈 리서치 Open Research",
-    author: "Jaewon Lee",
+    author: "이재원",
     bg: "#3242FE",
     ink: "#FFFFFF",
     content: {
@@ -45,7 +45,7 @@ const works = [
   },
   {
     title: "Fakekammer",
-    author: "Minju Kim",
+    author: "김민주",
     bg: "#FFCCF9",
     ink: "#111111",
     content: {
@@ -68,7 +68,7 @@ const works = [
   },
   {
     title: "Unfinished Archive",
-    author: "Dabin Lee",
+    author: "이다빈",
     bg: "#D5D5D5",
     ink: "#111111",
     content: {
@@ -90,7 +90,7 @@ const works = [
   },
   {
     title: "Time Zipper",
-    author: "Sangmin Lee",
+    author: "이상민",
     bg: "#F9FF88",
     ink: "#111111",
     content: {
@@ -120,7 +120,7 @@ const works = [
   },
   {
     title: "Cancellation Terms",
-    author: "Seungmin Kim",
+    author: "김승민",
     bg: "#A8FE84",
     ink: "#111111",
     content: {
@@ -144,7 +144,7 @@ const works = [
   },
   {
     title: "세로쓰기 문장부호",
-    author: "Nahyun Kim",
+    author: "김나현",
     bg: "#000000",
     ink: "#FFFFFF",
     content: {
@@ -168,7 +168,7 @@ const works = [
   },
   {
     title: "Asana Collection",
-    author: "Gaeun An",
+    author: "안가은",
     bg: "#FF5BC6",
     ink: "#111111",
     content: {
@@ -200,7 +200,7 @@ const works = [
   },
   {
     title: "Until The Location",
-    author: "Jinkyu Kim",
+    author: "김진규",
     bg: "#95E4FF",
     ink: "#111111",
     content: {
@@ -222,7 +222,7 @@ const works = [
   },
   {
     title: "Glut",
-    author: "Ayoung Chon",
+    author: "전아영",
     bg: "#FD6E5D",
     ink: "#111111",
     content: {
@@ -253,7 +253,7 @@ const works = [
   },
   {
     title: "Match The Face",
-    author: "Sihyeon Lee",
+    author: "이시현",
     bg: "#FFD04F",
     ink: "#111111",
     content: {
@@ -275,7 +275,7 @@ const works = [
   },
   {
     title: "What We Already Follow",
-    author: "Jimin Hur",
+    author: "허지민",
     bg: "#1F2064",
     ink: "#FFFFFF",
     content: {
@@ -302,7 +302,7 @@ const works = [
   },
   {
     title: "Kpop Classic",
-    author: "Yeyoung Kim",
+    author: "김예영",
     bg: "#C0B0FF",
     ink: "#111111",
     content: {
@@ -326,7 +326,7 @@ const works = [
   },
   {
     title: "Invisible Rules",
-    author: "Hoyeon Jo",
+    author: "조호연",
     bg: "#873561",
     ink: "#FFFFFF",
     content: {
